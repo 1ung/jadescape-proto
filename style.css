@@ -1,0 +1,87 @@
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 70%;
+    max-width: 100%;
+}
+
+/* The Close Button */
+.close-access {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-access:hover,
+.close-access:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.amen-modal-content {
+    margin: auto;
+    display: block;
+    width: 70%;
+    max-width: 100%;
+    height: 50%;
+}
+
+.apart-modal-content {
+    margin: auto;
+    display: block;
+    width: 70%;
+    max-width: 100%;
+    height: 50%;
+}
+
+.close-amen {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-amen:hover,
+.close-amen:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.close-apart {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-apart:hover,
+.close-apart:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
