@@ -23,6 +23,13 @@
 	<link rel="stylesheet" href="wp-content/themes/onepage/css/main.css" type="text/css" media="all" />
 	<link href="wp-content/themes/onepage/css/aos.css" rel="stylesheet" />
 	<link rel="stylesheet" href="style.css" type="text/css">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+    <link href="css/util.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" href="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">        
+        <link href="css/animate.css" rel="stylesheet" type="text/css">
+        <link href="css/chat.css" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]>
         <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -34,6 +41,65 @@
 	<script src="wp-content/themes/onepage/js/modernizr-custom.js"></script>
 	<script src="wp-content/themes/onepage/js/rellax.min.js"></script>
 	<script src="wp-content/themes/onepage/js/core.js"></script>
+	<script>
+		function myMap() {
+			var mapCanvas = document.getElementById("map");
+			var mapOptions = {
+				center: new google.maps.LatLng(1.377608, 103.956669),
+				zoom: 16,
+				gestureHandling: 'cooperative'
+			};
+			var map = new google.maps.Map(mapCanvas, mapOptions);
+		  var marker = new google.maps.Marker({
+			position: {lat: 1.377608, lng: 103.956669},
+			map: map
+		  });
+		}
+	</script>
+	<script>
+		 function validateForm(){
+			var check = true;
+			var first = document.forms["myForm"]["first-name"].value.trim();
+			var last = document.forms["myForm"]["last-name"].value.trim();
+			var email = document.forms["myForm"]["email"].value.trim();
+			var phone = document.forms["myForm"]["phone"].value.trim();
+			var message = document.forms["myForm"]["message"].value.trim();
+			var output = "";
+			var numberRegex = /[^0-9]+/;
+			if(!first.match(numberRegex) || first == ""){
+				output += "First name must be valid\n";
+				check = false;
+				document.forms["myForm"]["first-name"].parentNode.classList.add('alert-validate');
+			}
+			if(!last.match(numberRegex) || last == ""){
+				output += "Last name must be valid\n";
+				check = false;
+				document.forms["myForm"]["last-name"].parentNode.classList.add('alert-validate');
+			}
+			if (email.match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null){
+				output += "Email must be valid\n";
+				check = false;
+				document.forms["myForm"]["email"].parentNode.classList.add('alert-validate');
+			} 
+			phone = phone.replace(" ", "");
+			phone = phone.replace("+65", "");
+			var phoneRegex = /^\d{8}$/;
+			if (!phone.match(phoneRegex) && phone != "") {
+				output += "Phone number must be valid\n";
+				check = false;
+				document.forms["myForm"]["phone"].parentNode.classList.add('alert-validate');
+			}
+			if (message == "") {
+				output += "Message cannot be empty\n";
+				check = false;
+				document.forms["myForm"]["message"].parentNode.classList.add('alert-validate');
+			}
+			if(!check){
+				alert(output);
+			}
+			return check;
+		 }
+	</script>
 </head>
 <script src="wp-content/themes/onepage/js/home-scroll.js"></script>
 
@@ -214,7 +280,7 @@
 
 						</div>
 					</div>
-					<img src="wp-content/themes/onepage/img/Capvest_Group_Canada_real_estate.jpg" class="hideMob rellax" data-rellax-speed="-3"
+					<img src="wp-content/themes/onepage/img/Capvest_Group_Canada_real_estate.jpg" class="hideMob rellax" id="hide-apart" data-rellax-speed="-3"
 					    data-rellax-percentage="0.5" />
 				</div>
 			</div>
@@ -223,6 +289,7 @@
 			<div class="bg_street rellax" data-rellax-speed="-6" data-rellax-percentage="0.5"></div>
 			<div class="bg_canada rellax" data-rellax-speed="-6" data-rellax-percentage="0.5"></div>
 		</section>
+		<section id="map" style="width:100%;height:600px;"></section>
 		<section id="news">
 			<div class="inner">
 				<h2>
@@ -260,14 +327,151 @@
 			<div class="bg_news rellax" data-rellax-speed="-4" data-rellax-percentage="0.5"></div>
 		</section>
 	</div>
-	<footer class="footer" id="footer">
-		<div class="inner">
-			<div class="footer-logo"></div>
-			<div class="footer-copy">© Copyright 2018 - Website by
-				<a href="https://debug.sg/" target="_blank">Debug IT Solutions</a>
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form name="myForm" class="contact100-form validate-form" method="post" onsubmit="return validateForm()" action="index.html">
+				<span class="contact100-form-title">
+					Send Me A Message
+				</span>
+				<input type="hidden" name="_token" value="2di4GbrIlv0R8khhIq1R3FRSs0bnpQ9Xm8Ayjmm4" >
+				<input type="hidden" name="id" value=""/>
+				<label class="label-input100" for="first-name">Tell us your name *</label>
+				<div class="wrap-input100 rs1-wrap-input100 validate-input">
+					<input id="first-name" class="input100" type="text" name="first-name" placeholder="First name">
+					<span class="focus-input100"></span>
+				</div>
+				<div class="wrap-input100 rs2-wrap-input100 validate-input">
+					<input class="input100" type="text" name="last-name" placeholder="Last name">
+					<span class="focus-input100"></span>
+				</div>
+				<label class="label-input100" for="email">Enter your email *</label>
+				<div class="wrap-input100 validate-input">
+					<input id="email" class="input100" type="text" name="email" placeholder="Email">
+					<span class="focus-input100"></span>
+				</div>
+				<label class="label-input100" for="phone">Enter phone number</label>
+				<div class="wrap-input100">
+					<input id="phone" class="input100" type="text" name="phone" placeholder="Phone number">
+					<span class="focus-input100"></span>
+				</div>
+				<label class="label-input100" for="message">Message *</label>
+				<div class="wrap-input100 validate-input">
+					<textarea id="message" class="input100" name="message" placeholder="Write us a message"></textarea>
+					<span class="focus-input100"></span>
+				</div>
+				<div class="container-contact100-form-btn">
+					<button class="contact100-form-btn">
+						Send Message
+					</button>
+				</div>
+			</form>
+			<div class="contact100-more flex-col-c-m" style="background-image: url('images/jadescape2.png');">
+				<div class="flex-w size1 p-b-47">
+					<div class="txt1 p-r-25">
+						<span class="lnr lnr-user"></span>
+					</div>
+					<div class="flex-col size2">
+						<span class="txt1 p-b-20">
+							Name
+						</span>
+						<span class="txt2">
+																Marvin Ng
+														</span>
+					</div>
+				</div>
+				<div class="dis-flex size1 p-b-47">
+					<div class="txt1 p-r-25">
+						<span class="lnr lnr-phone-handset"></span>
+					</div>
+					<div class="flex-col size2">
+						<span class="txt1 p-b-20">
+							Call Me
+						</span>
+						<span class="txt2">
+																<a href="tel:+65 9236 0836" style="color: #01b5cc;">+65 9236 0836</a>
+						</span>
+					</div>
+				</div>
+				<div class="dis-flex size1 p-b-47">
+					<div class="txt1 p-r-25">
+						<!--<span class="lnr lnr-phone-handset"></span>-->
+						<i class="fab fa-whatsapp" style="font-weight: 100;"></i>
+					</div>
+					<div class="flex-col size2">
+						<span class="txt1 p-b-20">
+							WhatsApp Me
+						</span>
+						<span class="txt2">
+																<a href="https://api.whatsapp.com/send?phone=6592360836" style="color: #01b5cc;">+65 9236 0836</a>
+						</span>
+					</div>
+				</div>
+				<div class="dis-flex size1 p-b-47">
+					<div class="txt1 p-r-25">
+						<span class="lnr lnr-envelope"></span>
+					</div>
+					<div class="flex-col size2">
+						<span class="txt1 p-b-20">
+							Email Address
+						</span>
+						<span class="txt2">
+																<a href="mailto:Marvinngkh@era.com.sg" style="color: #01b5cc;">Marvinngkh@era.com.sg</a> 
+						</span>
+					</div>
+				</div>
 			</div>
 		</div>
-	</footer>
+	</div>
+	</div>
+	</div>
+	<div style="display:none;">
+		<div class="typing-indicator">
+		  <span></span>
+		  <span></span>
+		  <span></span>
+		</div>
+		<p class="chat-text-content">Hi, how can I further assist you?</p>
+		<li class="left-chat-container">
+			<div class="left-chat">
+				<img src="images/chat.jpg">
+			</div>
+		</li>
+		<li class="right-chat-container">
+			<div class="right-chat">
+			</div>
+		</li>
+		<div class="options left-chat" >
+		</div>
+		<div class="row options-header">
+		</div>
+		<div class="row options-content options-middle">
+		</div>
+		<div class="row options-content options-footer">
+		</div>
+	</div>
+	<div class="main-section">
+		<div class="row border-chat">
+			<div class="col-md-12 col-sm-12 col-xs-12 first-section">
+				<div class="row">
+					<div class="col-md-8 col-sm-6 col-xs-6 left-first-section">
+						<p><span class="lnr lnr-bubble"></span>Live Chat</p>
+					</div>
+					<div class="col-md-4 col-sm-6 col-xs-6 right-first-section">
+						<a href="#"><span class="lnr lnr-chevron-down"></span></a>
+						<a href="#"><span class="lnr lnr-cross"></span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row border-chat">
+			<div class="col-md-12 col-sm-12 col-xs-12 second-section">
+				<div class="chat-section" id="chat">
+					<ul id="chat-list">
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script src="wp-content/themes/onepage/js/aos.js"></script>
 	<script>
 		AOS.init({

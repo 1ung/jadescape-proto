@@ -57,3 +57,5 @@ window.onclick = function(event) {
         apartModal.style.display = "none";;
     }
 }
+
+var hideApart = document.getElementById("hide-apart");
