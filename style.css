@@ -148,7 +148,39 @@ img {
     display: flex !important;
 }
 
+/* Grid */
+
+.column {
+    flex-basis: 100%;
+    background: #fff;
+}
+
+#consumer-seminar {
+    padding-left: 11.5%;
+}
+
+.img-wrapper {
+    /* position: absolute;
+    top: 1580px;
+    right: 40px;
+    width: 554px;
+    height: 699px;
+    max-width: calc(100% - 40px); */
+    background-size: contain;
+    background: url(wp-content/themes/onepage/css/img/bg_building.png) no-repeat;
+}
+
 /* 100% Image Width on Smaller Screens */
+@media screen and (min-width: 800px) {
+    .row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+    .column {
+        flex: 1;
+    }
+}
 
 @media only screen and (max-width: 700px) {
     .modal-content {
